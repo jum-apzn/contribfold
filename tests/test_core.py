@@ -1,3 +1,4 @@
+from contextlib import closing
 import json
 import multiprocessing
 from pathlib import Path
@@ -280,12 +281,12 @@ class StoreTests(unittest.TestCase):
 
     def test_foreign_database_preserved(self):
         path = str(Path(self.temp.name) / "foreign.sqlite")
-        with sqlite3.connect(path) as db:
+        with closing(sqlite3.connect(path)) as db, db:
             db.execute("CREATE TABLE precious(value TEXT)")
             db.execute("INSERT INTO precious VALUES ('keep')")
         with self.assertRaises(ValueError):
             Store(path)
-        with sqlite3.connect(path) as db:
+        with closing(sqlite3.connect(path)) as db, db:
             self.assertEqual(db.execute("SELECT * FROM precious").fetchall(), [("keep",)])
 
     def test_process_crash_during_commit(self):
