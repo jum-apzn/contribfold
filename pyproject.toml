@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "contribfold"
+version = "0.1.0"
+description = "Coalesce knowledge-base contribution changes into resumable, atomic rebuilds."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = []
+keywords = ["rag", "knowledge-base", "incremental", "batch", "sqlite"]
+classifiers = ["Development Status :: 3 - Alpha", "Programming Language :: Python :: 3", "Operating System :: OS Independent", "Topic :: Software Development :: Libraries :: Python Modules"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.urls]
+Repository = "https://github.com/jum-apzn/contribfold"
+Issues = "https://github.com/jum-apzn/contribfold/issues"
